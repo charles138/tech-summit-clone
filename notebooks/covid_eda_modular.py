@@ -32,7 +32,7 @@ df = index_to_col(df, colname='date')
 # Convert from Pandas to a pyspark sql DataFrame.
 df = spark.createDataFrame(df)
 
-display(pdf)
+display(df)
 
 # COMMAND ----------
 
@@ -85,7 +85,7 @@ df.write.mode('overwrite').saveAsTable('covid_stats')
 
 # Using bamboolib output
 import plotly.express as px
-fig = px.line(df.sort_values(by=['date'], ascending=[True]).dropna(subset=['Daily_ICU_occupancy_per_million', 'Weekly_new_hospital_admissions_per_million', 'Daily_ICU_occupancy', 'Weekly_new_hospital_admissions']), x='date', y=['Daily_ICU_occupancy', 'Daily_ICU_occupancy_per_million', 'Daily_hospital_occupancy', 'Daily_hospital_occupancy_per_million', 'Weekly_new_hospital_admissions', 'Weekly_new_hospital_admissions_per_million'], template='plotly_white', title='Hospitalizations: 2020-2022')
+fig = px.line(df.toPandas().sort_values(by=['date'], ascending=[True]).dropna(subset=['Daily_ICU_occupancy_per_million', 'Weekly_new_hospital_admissions_per_million', 'Daily_ICU_occupancy', 'Weekly_new_hospital_admissions']), x='date', y=['Daily_ICU_occupancy', 'Daily_ICU_occupancy_per_million', 'Daily_hospital_occupancy', 'Daily_hospital_occupancy_per_million', 'Weekly_new_hospital_admissions', 'Weekly_new_hospital_admissions_per_million'], template='plotly_white', title='Hospitalizations: 2020-2022')
 fig.update_layout(legend_title_text='Indicator')
 fig.update_xaxes(title_text='Date')
 fig.update_yaxes(title_text='Patients')

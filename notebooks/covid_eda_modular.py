@@ -24,7 +24,7 @@ from covid_analysis.transforms import *
 import pandas as pd
 
 df = pd.read_csv(data_path)
-df = filter_country(df, country='United Kingdom')
+df = filter_country(df, country='Canada')
 df = pivot_and_clean(df, fillna=0)  
 df = clean_spark_cols(df)
 df = index_to_col(df, colname='date')
@@ -39,7 +39,7 @@ display(df)
 # MAGIC %md
 # MAGIC #### Save to Delta Lake
 # MAGIC The current schema has spaces in the column names, which are incompatible with Delta Lake.  To save our data as a table, we'll replace the spaces with underscores.  We also need to add the date index as its own column or it won't be available to others who might query this table.
-# MAGIC 
+# MAGIC
 # MAGIC *Note: Please run the following cell to ensure that when you write a Delta table it won't conflict with anyone elses!*
 
 # COMMAND ----------

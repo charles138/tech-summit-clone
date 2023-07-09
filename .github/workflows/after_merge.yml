@@ -14,11 +14,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run when merging from feature* to main
-        if: startsWith(github.ref, 'refs/pull/') && github.event.pull_request.merged && startsWith(github.head_ref, 'feature')
+        # if: startsWith(github.ref, 'refs/pull/') && github.event.pull_request.merged && startsWith(github.head_ref, 'feature')
         run: |
           # Put your script commands here
           echo "Custom script after merge"
           # When the workflow is a pull_request, head_ref contains the source ref, and ref contains the target branch.
-          echo "GitHub Ref: ${{ github.ref }}"
-          echo "github.event.pull_request.merged: ${{ github.event.pull_request.merged }}"
-          echo "GitHub Head_Ref: ${{ github.head_ref }}"
+          echo github.head_ref ${{ github.head_ref }}
+          echo github.ref ${{ github.ref }}
+          echo github.ref_name ${{ github.ref_name }}  

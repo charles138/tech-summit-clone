@@ -1,0 +1,26 @@
+name: Merge from feature* to main
+
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run when merging from feature* to main
+        # if: startsWith(github.ref, 'refs/pull/') && github.event.pull_request.merged && startsWith(github.head_ref, 'feature')
+        run: |
+          echo "Merging from a feature* branch to main"
+          # When the workflow is a pull_request, head_ref contains the source ref, and ref contains the target branch.
+          echo github.head_ref ${{ github.head_ref }}
+          echo github.ref ${{ github.ref }}
+          echo github.ref_name ${{ github.ref_name }}            

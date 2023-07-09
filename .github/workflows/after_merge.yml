@@ -20,4 +20,4 @@ jobs:
           # When the workflow is a pull_request, head_ref contains the source ref, and ref contains the target branch.
           echo "GitHub Ref: ${{ github.ref }}"
           echo "github.event.pull_request.merged: ${{ github.event.pull_request.merged }}"
-          echo "GitHub Ref: ${{ github.head_ref }}"
+          echo "GitHub Head_Ref: ${{ github.head_ref }}"

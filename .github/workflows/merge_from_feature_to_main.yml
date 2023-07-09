@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run when merging from feature* to main
-        if: startsWith(github.ref, 'refs/pull/') && github.event.pull_request.merged && startsWith(github.head_ref, 'feature')
+        if: startsWith(github.ref_name, 'main') && github.event.pull_request.merged && startsWith(github.head_ref, 'feature')
         run: |
           echo "Merging from a feature* branch to main"
           # When the workflow is a pull_request, head_ref contains the source ref, and ref contains the target branch.

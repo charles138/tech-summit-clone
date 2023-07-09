@@ -31,6 +31,7 @@ os.chdir(f'/Workspace/{repo_root}')
 # Skip writing pyc files on a readonly filesystem.
 sys.dont_write_bytecode = True
 
+# run PyTest on the current directory and telling it not to use the cacheprovider plugin.
 retcode = pytest.main([".", "-p", "no:cacheprovider"])
 
 # Fail the cell execution if we have any test failures.

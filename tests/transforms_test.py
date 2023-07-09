@@ -37,7 +37,6 @@ def test_filter(raw_input_df):
     filtered = filter_country(raw_input_df)
     assert (filtered['entity'] == "United States").all()
 
-
 # The test data has NaNs for Daily ICU occupancy; this should get filled to 0.
 def test_pivot(raw_input_df):
     pivoted = pivot_and_clean(raw_input_df, 0)
@@ -54,4 +53,5 @@ def test_clean_cols(colnames_df):
 # Test column creation from index.
 def test_index_to_col(raw_input_df):
     raw_input_df["col_from_index"] = raw_input_df.index
-    assert (raw_input_df.index == raw_input_df.col_from_index).all()
+    # assert (raw_input_df.index == raw_input_df.col_from_index).all()
+    assert (raw_input_df.columns == index_to_col(raw_input_df, 'col_from_index').columns).all()

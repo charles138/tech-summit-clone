@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Filter by country code.
-def filter_country(pdf, country="USA"):
+def filter_country(pdf, country = 'United States'):
     pdf = pdf[pdf.entity == country]
     return pdf
 

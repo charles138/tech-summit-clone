@@ -13,7 +13,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Run your custom script
+      - name: Run when merging from feature* to main
+        if: startsWith(github.ref, 'refs/pull/') && github.event.pull_request.merged && startsWith(github.head_ref, 'feature')
         run: |
           # Put your script commands here
           echo "Custom script after merge"

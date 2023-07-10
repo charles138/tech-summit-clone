@@ -1,1 +1,19 @@
+name: After Tag
 
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*' # Match tags starting with 'v'
+
+jobs:
+  after_tag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      # Add your desired steps here
+      - name: Run after tag
+        run: |
+          echo "This step will run after a tag is created"

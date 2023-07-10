@@ -43,4 +43,5 @@ jobs:
           databricks configure --host $DATABRICKS_HOST --token-file token-file
           rm -f token-file
           databricks workspace ls /Repos
+          databricks repos update --path "/Repos/Staging/tech-summit-clone" --tag ${{ github.ref_name }} 
     

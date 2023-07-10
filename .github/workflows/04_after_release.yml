@@ -18,3 +18,27 @@ jobs:
           echo github.head_ref ${{ github.head_ref }}
           echo github.ref ${{ github.ref }}
           echo github.ref_name ${{ github.ref_name }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install databricks-cli
+          pip install dbx --upgrade
+          databricks --version
+          dbx --version
+          
+      - name: Run Databricks CLI commands
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        run: |
+          echo $DATABRICKS_TOKEN > token-file
+          databricks configure --host $DATABRICKS_HOST --token-file token-file
+          rm -f token-file
+          databricks workspace ls /Repos
+          databricks repos update --path "/Repos/Staging/tech-summit-clone" --tag ${{ github.ref_name }} 
